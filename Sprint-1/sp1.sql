@@ -1,0 +1,171 @@
+CREATE DATABASE  IF NOT EXISTS `eucbitproject` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `eucbitproject`;
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+--
+-- Host: localhost    Database: eucbitproject
+-- ------------------------------------------------------
+-- Server version	5.5.10
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `civilstatus`
+--
+
+DROP TABLE IF EXISTS `civilstatus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `civilstatus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `civilstatus`
+--
+
+LOCK TABLES `civilstatus` WRITE;
+/*!40000 ALTER TABLE `civilstatus` DISABLE KEYS */;
+INSERT INTO `civilstatus` VALUES (1,'Maried'),(2,'Unmaried');
+/*!40000 ALTER TABLE `civilstatus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `designation`
+--
+
+DROP TABLE IF EXISTS `designation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `designation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `designation`
+--
+
+LOCK TABLES `designation` WRITE;
+/*!40000 ALTER TABLE `designation` DISABLE KEYS */;
+INSERT INTO `designation` VALUES (1,'Manager'),(2,'Cashier'),(3,'Salesperson');
+/*!40000 ALTER TABLE `designation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employee` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number` char(4) DEFAULT NULL,
+  `fullname` varchar(150) DEFAULT NULL,
+  `callingname` varchar(45) DEFAULT NULL,
+  `photo` blob,
+  `dobirth` date DEFAULT NULL,
+  `nic` char(12) DEFAULT NULL,
+  `address` text,
+  `mobile` char(10) DEFAULT NULL,
+  `land` char(10) DEFAULT NULL,
+  `description` text,
+  `doassignment` date DEFAULT NULL,
+  `gender_id` int(11) NOT NULL,
+  `designation_id` int(11) NOT NULL,
+  `civilstatus_id` int(11) NOT NULL,
+  `employeestatus_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_employee_gender_idx` (`gender_id`),
+  KEY `fk_employee_designation1_idx` (`designation_id`),
+  KEY `fk_employee_civilstatus1_idx` (`civilstatus_id`),
+  KEY `fk_employee_employeestatus1_idx` (`employeestatus_id`),
+  CONSTRAINT `fk_employee_civilstatus1` FOREIGN KEY (`civilstatus_id`) REFERENCES `civilstatus` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employee_designation1` FOREIGN KEY (`designation_id`) REFERENCES `designation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employee_employeestatus1` FOREIGN KEY (`employeestatus_id`) REFERENCES `employeestatus` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_employee_gender` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (1,'0401','RDD Suranga','Suranga',NULL,'1980-07-21','803456767V','361/1, Kalyani Rd, Weliweriya','0772307929','0332255557','Worked in Colombo','2004-06-13',1,1,1,1),(2,'0501','PAS Sanasuma','Susith',NULL,'1982-11-11','822846767V','No 12/A, Hansagiri Rd, Gampaha','0772330520','0332232811','Work in Colombo','2005-12-12',1,1,1,1),(3,'0801','SAN Sanjeewa','Manjula',NULL,'1990-03-02','902346767V','No 23, Main Road, Minuwangoda','0769393747','0112684906','Work in colombo','2010-08-06',1,1,1,1),(4,'0801','Sumanalatha','Latha',NULL,'2018-06-20','675675656V','Gampaha','0782345422','0335643678','Nothing','2018-05-14',2,2,1,1),(5,'0801','Thusitha','Thusitha','data:image/jpeg;base64,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','2018-06-13','871235454V','Kaduwela','0774681000','0112684838','Center','2018-05-15',1,3,1,1),(6,'1001','Niroshan','Mendis','data:image/jpeg;base64,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','2018-06-13','941236756V','Piliyandala','0772345676','0112222222','Well','2018-05-15',1,2,2,1);
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employeestatus`
+--
+
+DROP TABLE IF EXISTS `employeestatus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employeestatus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employeestatus`
+--
+
+LOCK TABLES `employeestatus` WRITE;
+/*!40000 ALTER TABLE `employeestatus` DISABLE KEYS */;
+INSERT INTO `employeestatus` VALUES (1,'Working'),(2,'Onleave'),(3,'Suspended');
+/*!40000 ALTER TABLE `employeestatus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gender`
+--
+
+DROP TABLE IF EXISTS `gender`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gender` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gender`
+--
+
+LOCK TABLES `gender` WRITE;
+/*!40000 ALTER TABLE `gender` DISABLE KEYS */;
+INSERT INTO `gender` VALUES (1,'Male'),(2,'Female');
+/*!40000 ALTER TABLE `gender` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-06-15  9:51:28

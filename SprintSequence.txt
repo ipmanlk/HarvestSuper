@@ -1,0 +1,13 @@
+Sprint-1 
+
+MainWindow (test for menu click)  
+Home (initial and reloading the home)
+Employee (test for data by URL, ui/employee, loding data) 
+  
+
+
+Sprint-2
+
+User
+Previlage 
+Login 

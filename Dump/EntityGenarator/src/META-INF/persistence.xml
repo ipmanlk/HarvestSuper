@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="EntityGenaratorPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entity.Operationstatus</class>
+    <class>entity.Userstatus</class>
+    <class>entity.Sessionstatus</class>
+    <class>entity.Employee</class>
+    <class>entity.Civilstatus</class>
+    <class>entity.Product</class>
+    <class>entity.Gender</class>
+    <class>entity.Module</class>
+    <class>entity.Sessionlog</class>
+    <class>entity.Role</class>
+    <class>entity.Employeestatus</class>
+    <class>entity.Designation</class>
+    <class>entity.Category</class>
+    <class>entity.Userrole</class>
+    <class>entity.User</class>
+    <class>entity.Privilage</class>
+    <class>entity.Itempackagestatus</class>
+    <class>entity.Itempackagetype</class>
+    <class>entity.Operationlog</class>
+    <class>entity.Itempackage</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/twoelephantsfireworks?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
+    </properties>
+  </persistence-unit>
+</persistence>
